@@ -12,7 +12,16 @@ struct ContentView: View {
     @State private var showSheet: Bool = false
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
+            VStack {
+                Title(totalAmount: 500)
+                CategoryLine(text: "Besoins", color: .green)
+                CategoryLine(text: "Désirs", color: .orange)
+                CategoryLine(text: "Envies", color: .red)
+            }
+            .padding()
+            .background(roundedBackground)
+            
             Spacer()
             
             HStack {
@@ -23,9 +32,15 @@ struct ContentView: View {
             }
             .padding()
         }
+        .padding(.horizontal)
         .sheet(isPresented: $showSheet) {
             Text("Hello World")
         }
+    }
+    
+    var roundedBackground: some View {
+        RoundedRectangle(cornerRadius: 20, style: .continuous)
+            .stroke()
     }
 }
 
@@ -54,5 +69,54 @@ struct PlusButton: View {
             }
         }
 
+    }
+}
+
+struct Title: View {
+    var totalAmount: Int
+    
+    var body: some View {
+        HStack {
+            Text("Total Dépensé")
+                .bold()
+                .font(.title2)
+            Spacer()
+            Text("\(totalAmount)€")
+                .bold()
+                .font(.title2)
+        }
+    }
+}
+
+struct CategoryLine: View {
+    let text: String
+    let color: Color
+    
+    var body: some View {
+        HStack {
+            ZStack {
+                Text(text.firstLetter)
+                    .foregroundColor(.white)
+                    .background(
+                        Circle()
+                            .foregroundColor(color)
+                            .frame(width: 30, height: 30)
+                    )
+            }
+            .frame(width: 30, height: 30)
+            
+            Text(text)
+            
+            Spacer()
+            
+            Text("55€")
+                .bold()
+        }
+    }
+}
+
+extension String {
+    var firstLetter: String {
+        return "\(self.prefix(1))"
     }
 }
