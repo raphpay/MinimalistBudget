@@ -10,6 +10,7 @@ import SwiftUI
 struct CategoryLine: View {
     let text: String
     let color: Color
+    let amount: Double
     
     var body: some View {
         HStack {
@@ -28,7 +29,7 @@ struct CategoryLine: View {
             
             Spacer()
             
-            Text("55€")
+            Text("\(amount.rounded(to: 2))€")
                 .bold()
         }
     }
@@ -36,6 +37,6 @@ struct CategoryLine: View {
 
 struct CategoryLine_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryLine(text: "Besoin", color: .green)
+        CategoryLine(text: "Besoin", color: .green, amount: 55)
     }
 }

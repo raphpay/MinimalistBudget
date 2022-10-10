@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Title: View {
-    var totalAmount: Int
+    var totalAmount: Double
     
     var body: some View {
         HStack {
@@ -16,7 +16,7 @@ struct Title: View {
                 .bold()
                 .font(.title2)
             Spacer()
-            Text("\(totalAmount)€")
+            Text("\(totalAmount.rounded(to: 2))€")
                 .bold()
                 .font(.title2)
         }
